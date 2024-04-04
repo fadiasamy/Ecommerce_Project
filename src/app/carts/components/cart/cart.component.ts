@@ -22,11 +22,14 @@ export class CartComponent implements OnInit{
 
 
     getCartProducts(){
-      const cartData = localStorage.getItem("Cart");
-      if (cartData) {
-        this.cartProducts = JSON.parse(cartData);
-
+      if (typeof localStorage !== 'undefined') {
+          const cartData = localStorage.getItem("Cart");
+         if (cartData) {
+          this.cartProducts = JSON.parse(cartData);
+  
+        }
       }
+      
       this.getcarttotal();
 
  console.log(this.cartProducts);

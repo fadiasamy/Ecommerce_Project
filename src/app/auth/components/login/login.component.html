@@ -1,43 +1,40 @@
-<div id="login" class="container">
-    <div class="row">
-        <div class="my-5 col  ">
-            <div class="row ">
-                <div class="mt-3  mr-5  col text-center logo">
-                    <h4 class="d-flex justify-content-center logo-title"><img src="../../../../assets/images/shopping-bag 1.svg" ><span>Blanja</span></h4>
-                </div>
-                <div class="text-center row">
-                    <div class="col">
-                        <p class="mt-3 text-login">Please login with your account</p><div></div>
-                    </div>
-                    <form  (ngSubmit)="login()" [formGroup]="loginForm">
-                        <div class="d-flex justify-content-center  form-group mt-2">
-                            
-                                <label for="input" class="undefined form-label"></label>
-                                <input id="input" class=" form-control " name="email" placeholder="Email" type="email" formControlName="email">
-                            
-                        </div>
-                        <div class="text-error" *ngIf = "fc['email'].errors&& isSubmitted">
-                             <p class="err-Msg" *ngIf="fc['email'].errors['required']">*Email is required</p>
-                        </div>
-                        <label for="input" class="undefined form-label" *ngIf = "!fc['email'].errors||!isSubmitted"></label>
-
-                        <div class="d-flex justify-content-center form-group">
-                            
-                                <label for="input" class="undefined form-label"></label>
-                                <input id="input2" class="form-control " name="password" placeholder="Password" type="password" formControlName="password">
-                                 
-                        </div>
-                        <div class="text-error" *ngIf = "fc['password'].errors&& isSubmitted">
-                            <p class="err-Msg" *ngIf="fc['password'].errors['required']">*Password is required</p>
-                        </div>
-
-                        <p class="mt-3"><a class="forgot" href="/login">Forgot password?</a>
-                       <div class="d-flex justify-content-center "  >
-                        <button type="submit" class="btn mt-2" style="background-color: rgb(219, 48, 34); color: rgb(255, 255, 255); ">Login</button>
-                       </div>
-                        <p class="mt-4"><a class="acc" href="/register">Don't have a account?<span style="color: rgb(219, 48, 34);  ;"> Register</span></a>
-                        </p>
-                    </form>
-                </div>
-            </div>
-        </div>
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+          <div class="my-5 col-12">
+              <div class="row login-box">
+                  <div class="mt-3 mr-5 col text-center logo">
+                      <h4 class="d-flex justify-content-center logo-title"><img src="../../../../assets/images/shopping-bag 1.svg"><span>Glamora</span></h4>
+                  </div>
+                  <div class="text-center">
+                      <div class="col text-center">
+                          <p class="mt-2 text-login" style="color: white;">Please login with your account</p>
+                      </div>
+                      <form (ngSubmit)="login()" [formGroup]="loginForm">
+                          <div class="form-group  d-flex justify-content-center ">
+                              <label for="input" class="undefined form-label"></label>
+                              <input id="input" class="form-control" [ngClass]="{'is-invalid': fc['email'].errors && isSubmitted}" name="email" placeholder="Email" type="email" formControlName="email">
+                          </div>
+                          <div class="text-error mr-2" *ngIf="fc['email'].errors && isSubmitted">
+                              <p class="err-Msg" *ngIf="fc['email'].errors['required']">*Email is required</p>
+                          </div>
+                          <label for="input" class="undefined form-label" *ngIf="!fc['email'].errors || !isSubmitted"></label>
+                          <div class="d-flex justify-content-center form-group">
+                              <label for="input" class="undefined form-label"></label>
+                              <input id="input2" class="form-control" name="password" [ngClass]="{'is-invalid': fc['password'].errors && isSubmitted}" placeholder="Password" type="password" formControlName="password">
+                          </div>
+                          <div class="text-error" *ngIf="fc['password'].errors && isSubmitted">
+                              <p class="err-Msg" *ngIf="fc['password'].errors['required']">*Password is required</p>
+                          </div>
+                          <p class="mt-3"><a class="forgot">Forgot password?</a>
+                              <div class="d-flex justify-content-center">
+                                  <button type="submit" class="btn mt-2" style="background-color: rgb(219, 48, 34); color: rgb(255, 255, 255);">Login</button>
+                              </div>
+                              <p class="mt-4 acc " style="color: white;">Don't have a account? <a style="text-decoration:none" routerLink="/register"><span style="color: rgb(219, 48, 34); cursor: pointer;"> Register</span></a></p>
+                      </form>
+                      <!-- <div class="spinner-container" *ngIf="authService.loading"> -->
+                          <!-- <app-spinner></app-spinner> -->
+                      <!-- </div> -->
+                  </div>
+              </div>
+          </div> 
+  </div>

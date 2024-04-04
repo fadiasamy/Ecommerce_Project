@@ -8,17 +8,20 @@ import { UserProfileComponent } from './user-profile/Components/user-profile.com
 import { OrderComponent } from './order/order.component';
 import { CategoryComponent } from './category/category.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { RegisterComponent } from './auth/components/register/register.component';
+import { authGuard } from './auth/components/guards/auth-guard.guard';
 
 const routes: Routes = [
   {path:"products" , component:AllProductsComponent},
-  {path:"user-profile", component: UserProfileComponent},
+  {path:"user-profile", component: UserProfileComponent, canActivate:[authGuard]},
   {path:"details/:id" , component:ProductsDetailsComponent},
   {path:"details" , component:ProductsDetailsComponent},
   {path:"login", component:LoginComponent},
-  {path:"carts" , component:CartComponent},
-  {path:"order",component:OrderComponent},
+  {path:"register", component:RegisterComponent},
+  {path:"carts" , component:CartComponent, canActivate:[authGuard]},
+  {path:"order",component:OrderComponent, canActivate:[authGuard]},
   {path:"categories" , component:CategoryComponent},
-    {path:'product/:id', component:AllProductsComponent},
+  {path:'product/:id', component:AllProductsComponent},
 
 
   
