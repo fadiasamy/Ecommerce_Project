@@ -6,12 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { FormsModule } from '@angular/forms';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -24,8 +26,8 @@ import { FormsModule } from '@angular/forms';
   exports: [
     HeaderComponent,
     SpinnerComponent,
-    FormsModule
-
+    FormsModule,
+    FooterComponent
   ]
 })
 export class SharedModule { }

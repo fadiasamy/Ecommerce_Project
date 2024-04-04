@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../auth/servics/auth.service';
-import { User } from '../../../products/services/models/User';
-
+ 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -24,5 +23,3 @@ export class HeaderComponent implements OnInit {
     return this.user.token;
   }
 }
-  
-

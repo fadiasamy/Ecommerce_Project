@@ -6,6 +6,8 @@ import { LoginComponent } from './auth/components/login/login.component';
 import { CartComponent } from './carts/components/cart/cart.component';
 import { UserProfileComponent } from './user-profile/Components/user-profile.component';
 import { OrderComponent } from './order/order.component';
+import { CategoryComponent } from './category/category.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 const routes: Routes = [
   {path:"products" , component:AllProductsComponent},
@@ -15,7 +17,14 @@ const routes: Routes = [
   {path:"login", component:LoginComponent},
   {path:"carts" , component:CartComponent},
   {path:"order",component:OrderComponent},
-  {path:"**" , redirectTo:"products",pathMatch:"full"}
+  {path:"categories" , component:CategoryComponent},
+  {path:'product/:id', component:AllProductsComponent},
+
+
+  
+  // {path:"**" , redirectTo:"products",pathMatch:"full"}
+  {path:"**" , redirectTo:"categories",pathMatch:"full"}
+
 
 ];
 
