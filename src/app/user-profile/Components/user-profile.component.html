@@ -1,0 +1,72 @@
+<div class="text-center w-100" *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>
+<section style="background-color: #eee;">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="{{profile.data.photo}}" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3">{{ profile.data.name }}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div *ngIf="!editMode; else editModeTemplate">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Full Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ profile.data.name }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ profile.data.email }}</p>
+                </div>
+              </div>
+              <hr>
+              <button class="btn btn-primary rounded-square bg-secondary" (click)="toggleEditMode()">Edit Profile</button>
+            </div>
+            <ng-template #editModeTemplate>
+              <form >
+
+                <div class="form-group">
+                  <br>
+                  <label for="nameInput">Full Name</label>
+                  <input type="text" id="nameInput" name="nameInput" [(ngModel)]="updatedProfile.name">
+                </div>
+                <br>
+                <div class="form-group">
+                  <label for="emailInput">Email</label>
+                  <input type="email" id="emailInput" name="emailInput" [(ngModel)]="updatedProfile.email">
+                </div>
+                <br>
+                <div class="form-group">
+                  <label for="image">image</label>
+                  <input type="file" id="imgInput" name="imgInput"  (change)="onFileChange($event)">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary rounded-square bg-secondary mr-3" (click)="updateUserProfile()">Save Changes</button>
+                <button type="button" class="btn btn-primary rounded-square bg-secondary ml-2" (click)="cancelEditMode()">Cancel</button>
+              </form>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+

@@ -1,0 +1,105 @@
+  .acc {
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 400; 
+    color: #222222;
+    
+}
+.form-group{
+    display: inline;
+}
+  .forgot {
+    text-decoration: none;
+    color: #DB3022;
+    font-size: 12px;
+    font-weight: 400;
+    padding-left: 290px;
+}
+
+ 
+ 
+.form-control{
+    max-width: 400px;
+}
+.err-msg{
+    max-width: 400px;
+}
+
+form{
+    width: 100%;
+}
+
+ 
+.btn{
+   
+    border-radius:50px;
+     width:400px;
+}
+ 
+  .logo-title {
+    color: #DB3022;
+}
+
+.text-login {
+    color: #222222;
+    font-weight: 700;
+}
+
+ .logo-title span {
+    padding-top: 11px;
+}
+.logo{
+    margin-right: 30px;
+}
+
+ .text-error {
+    
+    color: #f01f0e;
+    font-size: 12px;
+    margin-bottom: 0;
+    
+}
+ 
+ 
+ 
+
+/* Adjust padding for smaller screens */
+@media (max-width: 576px) {
+     .forgot {
+        padding-left: 0;
+        text-align: center; /* Center text */
+    }
+
+    
+    
+}
+
+@media (max-width: 460px) {
+    
+    .btn{
+   
+        border-radius:50px;
+         width:100%;
+    }
+   
+   
+}
+
+@media (max-width: 480px) {
+     .forgot {
+        padding-left: 0;
+        text-align: center; /* Center text */
+    }
+    
+  
+}
+
+ 
+
+
+
+ 
+
+  
+  
+  

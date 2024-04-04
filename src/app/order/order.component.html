@@ -1,0 +1,86 @@
+<!--
+<div class="container">
+  <div *ngIf="cartProducts && cartProducts.length > 0">
+    <h2>Order Items</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Product Price</th>
+          <th>Quantity</th>
+          <th>Product Image</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of cartProducts; let i = index">
+          <td>{{ product.item.name }}</td>
+          <td>{{ product.item.price }}</td>
+          <td>{{ product.quantity }}</td>
+          <td><img src="{{ product.item.images[0] }}" alt="Product Image" style="max-width: 100px;"></td>
+          <td><button class="btn btn-primary rounded-square bg-secondary" (click)="cancelProduct(i)">Cancel</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-primary rounded-square bg-secondary" (click)="confirmOrder()">Confirm</button>
+  </div>
+
+  <div *ngIf="cartProducts && cartProducts.length === 0" class="empty-order">
+    <p>No items in the order.</p>
+  </div>
+
+
+  <div class="order-total">
+    <h2>Order Total</h2>
+    <p>Total: {{ total }}</p>
+
+  </div>
+  <div *ngIf="showPaymentButton">
+    <button class="btn btn-primary rounded-square bg-secondary">Payment</button>
+  </div>
+</div>
+
+ -->
+
+
+ <div class="container">
+  <div *ngIf="cartProducts && cartProducts.length > 0">
+    <h2>Order Items</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Product Price</th>
+          <th>Quantity</th>
+          <th>Product Image</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of cartProducts; let i = index">
+          <td>{{ product.item.name }}</td>
+          <td>{{ product.item.price }}</td>
+          <td>{{ product.quantity }}</td>
+          <td><img src="{{ product.item.images[0] }}" alt="Product Image" style="max-width: 100px;"></td>
+          <td><button class="btn btn-primary rounded-square bg-secondary" (click)="cancelProduct(i)">Cancel</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-between align-items-center">
+      <button class="btn btn-primary rounded-square bg-secondary" (click)="confirmOrder()">Confirm</button>
+      <div *ngIf="showPaymentButton">
+        <button class="btn btn-primary rounded-square bg-secondary">Payment</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="cartProducts && cartProducts.length === 0" class="empty-order">
+    <p>No items in the order.</p>
+  </div>
+
+  <div class="order-total">
+    <h2>Order Total</h2>
+    <p>Total: {{ total }}</p>
+  </div>
+</div>
+

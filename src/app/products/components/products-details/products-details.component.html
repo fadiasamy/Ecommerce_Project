@@ -1,0 +1,41 @@
+<div class="">
+  <div class="box" *ngIf="!loading">
+    <div class="col-md-5 col-sm-6 Animation-1 ">
+      <img src="{{data.data.product.images?.[0]}}" alt="sss" />
+    </div>
+    <div class="col-md-7 col-sm-6 p-5">
+      <div class="info">
+        <div class="list-unstyled">
+          <ul>
+            <li>
+              <h4>Name : </h4>
+              <span>{{ data.data.product.name }}</span>
+            </li>
+            <li>
+              <h4>Description : </h4>
+              <span> {{ data.data.product.description }}</span>
+            </li>
+            <li>
+              <h4>Category : </h4>
+              <span>{{ data.data.product.category }}</span>
+            </li>
+            <!-- <li><strong>Colors : </strong>{{data.data.product.Colors?.[0]}}</li> -->
+            <li>
+              <h4>Quantity : </h4>
+              <span>{{ data.data.product.quantity }}</span>
+            </li>
+            <li>
+              <h4>Price : </h4>
+              <span>{{ data.data.product.price }} $</span>
+            </li>
+            <li>
+              <h4>Rate :</h4>
+              <span>{{ data.data.product.ratingsQuantity }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-spinner *ngIf="loading"></app-spinner>
+</div>

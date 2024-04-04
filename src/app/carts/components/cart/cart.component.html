@@ -1,0 +1,62 @@
+<div class="cartBox">
+  <div class="text-center w-100" *ngIf="loading">
+    <app-spinner></app-spinner>
+  </div>
+  <h1 class="text-Secondary">Shopping cart</h1>
+  <div class="headcart">
+    <p class="lead">You have <label class="text-Secondary">{{cartProducts.length}}</label> items in your cart</p>
+    <span class="text-Secondary card-header" (click)="clearCart()">Clear shopping cart</span>
+  </div>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+
+      </th>
+      <th>Name</th>
+      <th>Price</th>
+      <th style="width: 25%;">Quantity</th>
+      <th>Total</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of cartProducts ; let index=index">
+      <td><img src="{{item.item.images[0]}}" alt=""></td>
+      <td>{{item.item.name}}</td>
+      <td>{{item.item.price}}</td>
+      <td>
+        <div class="quantity">
+          <button class="btn btn-dark" (click)="addAmount(index)">+</button>
+          <input class="form-control" type="number" (change)="detectChange()" [(ngModel)]="item.quantity" min="1" >
+          <button class="btn btn-dark" (click)="minusAmount(index)" >-</button>
+
+
+        </div>
+      </td>
+      <td>{{item.item.price * item.quantity}}</td>
+      <td><button class="btn btn-primary rounded-square bg-secondary" (click)="deletProduct(index)">Delete</button></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>Total: {{total}} LE</th>
+      <th><button class="btn btn-primary rounded-square bg-secondary" (click)="addCart()">Confirm</button></th>
+    </tr>
+  </tfoot>
+</table>
+<div class="alert alert-success" role="alert" *ngIf="success"><strong>Well Done</strong> Your order has been successfully sent</div>
+<button class="btn btn-primary rounded-square bg-secondary" (click)="goToOrderPage()">Go to Order Page</button>
+
+
+
+
+
+
+
+
