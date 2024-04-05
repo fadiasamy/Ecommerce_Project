@@ -17,10 +17,33 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     this.looop();
   }
+  // productData:object={productId:this.data.id,
+  //   color:"black"}
+  // addCart(){
+  //   this._productService.addproducttoCart(this.productData).subscribe({
+  //     next:(res)=>{
+  //       console.log(res)
+  //     },
+  //     error:(e)=>{
+  //       console.log(e)
+  //     }
+  //   });
+  // }
 
+  addToCart(productData:object){
+    this._productService.addproducttoCart(productData).subscribe({
+      next:(res)=>{
+        console.log(res)
+      },
+      error:(e)=>{
+        console.log(e)
+      }
+    })
+  }
   add() {
-    console.log(this.data);
+    // console.log(this.data);
     this.item.emit({ item: this.data, quantity: this.amount });
+    this.addToCart({ productId: this.data.id, color: 'black' });
   }
   onview(id: any) {
     this.router.navigate(['/details', id]);
@@ -38,22 +61,4 @@ export class ProductComponent implements OnInit {
       }
     }
   }
-
-
-  productData:object={
-    "productId":"660da05f9a513d8fb658f688",
-      "color":"black"
-  };
-  addToCart(){
-    this._productService.addproducttoCart(this.productData).subscribe({
-      next:(res)=>{
-        console.log(res)
-      },
-      error:(e)=>{
-        console.log(e)
-      }
-    })
-  }
-  
-
 }

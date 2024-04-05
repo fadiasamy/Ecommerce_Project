@@ -7,6 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
+addCart() {
+throw new Error('Method not implemented.');
+}
+addToCart() {
+throw new Error('Method not implemented.');
+}
   @Input() data: any = {};
   @Output() item = new EventEmitter<any>();
   addButton: boolean = false;

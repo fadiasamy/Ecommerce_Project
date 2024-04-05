@@ -13,11 +13,12 @@
     </div>
     <span>{{ data.price }}</span>
     <div class="view" (click)="onview(data.id)">view</div>
-    <div class="d-flex gab-3 w-50" *ngIf="addButton">
+   <div class="d-flex gab-3 w-50" *ngIf="addButton">
       <input type="number" class="form-control" (ngModel)="amount" />
       <button class="btn btn-info btn btn-primary rounded-square" (click)="add(); addButton = false">
         Add
       </button>
+      <!-- <button class="btn btn-primary rounded-square bg-secondary" (click)="addCart()">Confirm</button> -->
     </div>
   </div>
 </div>

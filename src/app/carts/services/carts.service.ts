@@ -20,10 +20,16 @@ export class CartsService {
     return this.http.post(environment.baseApi + 'cart',Model,{headers});
   }
 
-
-
- 
+  // getCart(token: string): Observable<any> {
+  //   const headers = new HttpHeaders({
+  //     Authorization: "Bearer " + token,
+  //   });
+  //   return this.http.get(environment.baseApi + 'cart', { headers });
+  // }
 }
+
+
+
 
 
 

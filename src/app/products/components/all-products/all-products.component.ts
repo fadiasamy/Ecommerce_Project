@@ -89,6 +89,7 @@ export class AllProductsComponent implements OnInit {
       this.loading = false;
       this.currentPage = res.currentPage;
       this.totalPages = res.totalPages;
+      console.log(res);
     }, error => {
       this.loading = false;
       console.log(error.message);
@@ -125,4 +126,5 @@ export class AllProductsComponent implements OnInit {
       localStorage.setItem("Cart", JSON.stringify(this.cartProducts));
     }
   }
+
 }

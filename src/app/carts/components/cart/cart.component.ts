@@ -20,20 +20,33 @@ export class CartComponent implements OnInit{
       this.getCartProducts();
     }
 
-
     getCartProducts(){
       if (typeof localStorage !== 'undefined') {
           const cartData = localStorage.getItem("Cart");
          if (cartData) {
           this.cartProducts = JSON.parse(cartData);
-  
+
         }
       }
-      
+
       this.getcarttotal();
 
  console.log(this.cartProducts);
     }
+// getCartProducts() {
+//   this.service.getCart(this.token).subscribe(
+//     (response) => {
+//       this.cartProducts = response.cartProducts;
+//       this.getcarttotal();
+//        console.log(this.cartProducts);
+
+//     },
+//     (error) => {
+//       console.log("Error fetching cart:", error);
+//     }
+//   );
+// }
+
     addAmount(index:number){
       this.cartProducts[index].quantity++;
       this.getcarttotal();
@@ -83,13 +96,15 @@ export class CartComponent implements OnInit{
 }
 
 
+
+
 addCart(){
   let products=this.cartProducts.map(item => {
-    return {productId:item.item.id,Color:"red"}
+    return {productId:item.item.id,Color:item.item.color}
   })
   let Model={
     productId:this.cartProducts[0].item._id,
-    color:"red"
+    color:this.cartProducts[0].item.color
 
   };
   this.service.createNewCart(Model,this.token).subscribe(res => {
@@ -98,10 +113,6 @@ addCart(){
   console.log(Model);
 
 }
-
-
-
-
 
 
 }
