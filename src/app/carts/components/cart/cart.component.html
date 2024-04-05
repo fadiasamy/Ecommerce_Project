@@ -26,6 +26,8 @@
       <td><img src="{{item.item.images[0]}}" alt=""></td>
       <td>{{item.item.name}}</td>
       <td>{{item.item.price}}</td>
+
+
       <td>
         <div class="quantity">
           <button class="btn btn-dark" (click)="addAmount(index)">+</button>
@@ -37,6 +39,7 @@
       </td>
       <td>{{item.item.price * item.quantity}}</td>
       <td><button class="btn btn-primary rounded-square bg-secondary" (click)="deletProduct(index)">Delete</button></td>
+      <!-- <td><button class="btn btn-primary rounded-square bg-secondary" (click)="Delete(item.id,$event)">Delete</button></td> -->
     </tr>
   </tbody>
   <tfoot>

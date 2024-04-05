@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { parse } from 'node:path';
 import { CartsService } from '../../services/carts.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cart',
@@ -14,6 +15,8 @@ export class CartComponent implements OnInit{
   success:boolean=false;
   token:string=localStorage.getItem("token")||" ";
   loading: boolean = false;
+  CartsService: any;
+  cartsService: any;
     // email:string=localStorage.getItem("email")||" ";
     constructor(private service:CartsService,private router: Router){}
     ngOnInit(): void {
@@ -93,12 +96,9 @@ export class CartComponent implements OnInit{
           this.total += this.cartProducts[x].item.price * this.cartProducts[x].quantity;
        }
      // console.log(this.total);
-}
+   }
 
-
-
-
-addCart(){
+     addCart(){
   let products=this.cartProducts.map(item => {
     return {productId:item.item.id,Color:item.item.color}
   })
@@ -113,13 +113,60 @@ addCart(){
   console.log(Model);
 
 }
+// deleteProduct(productId: number) {
+//   this.CartsService.deleteProductFromCart(productId, this.token)
+//     .subscribe(
+//       () => {
+//         console.log('Product deleted successfully.');
+//       },
+//       (error: any) => {
+//         console.error('Error deleting product:', error);
+//       }
+//     );
+// }
 
+// deleteProductD(productId: number) {
+//   this.cartsService.deleteProductFromCart(productId)
+//     .subscribe(
+//       () => {
+//         console.log('Product deleted successfully.');
+//       },
+//       (error: any) => {
+//         console.error('Error deleting product:', error);
+//       }
+//     );
+// }
+
+// Delete(id:number,event:any){
+//   Swal.fire({
+//     text:"Are You Sure You Want To Delete It",
+//     showCancelButton:true,
+//     confirmButtonText:"yes , Delete It",
+//     cancelButtonText:"No Cancel",
+//     reverseButtons:true
+//   }).then((res)=>{
+//     if(res.isConfirmed){
+//       this.CartsService.DeleteProduct(id).subscribe({
+//         next:(res:any)=>{
+//           console.log(res);
+
+
+
+//           const Tr=event.target.closest('tr');
+//           if(Tr){
+//             Tr.remove();
+//           }
+//           // }
+
+//         }
+//       })
+
+//     }
+//   })
+
+// }
 
 }
-
-
-
-
 
 
 
