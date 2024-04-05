@@ -98,21 +98,7 @@ addCart(){
   console.log(Model);
 
 }
-productData:object={
-  "productId":"660da05f9a513d8fb658f688",
-    "color":"black"
-};
 
-add(){
-  this.service.addproducttoCart(this.productData).subscribe({
-    next:(res)=>{
-      console.log(res)
-    },
-    error:(e)=>{
-      console.log(e)
-    }
-  })
-}
 
 
 
