@@ -24,7 +24,7 @@ const routes: Routes = [
   {path:'product/:id', component:AllProductsComponent},
 
 
-  
+
   // {path:"**" , redirectTo:"products",pathMatch:"full"}
   {path:"**" , redirectTo:"categories",pathMatch:"full"}
 

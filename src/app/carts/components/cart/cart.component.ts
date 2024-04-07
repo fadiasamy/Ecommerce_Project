@@ -1,176 +1,161 @@
 import { Component, OnInit } from '@angular/core';
-import { parse } from 'node:path';
-import { CartsService } from '../../services/carts.service';
 import { Router } from '@angular/router';
+import { CartsService } from '../../services/carts.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.css'
+  styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements OnInit{
-  cartProducts:any[]=[];
-  total:any=0;
-  success:boolean=false;
-  token:string=localStorage.getItem("token")||" ";
+export class CartComponent implements OnInit {
+  cartProducts: any[] = [];
+  total: number = 0;
+  success: boolean = false;
   loading: boolean = false;
-  CartsService: any;
-  cartsService: any;
-    // email:string=localStorage.getItem("email")||" ";
-    constructor(private service:CartsService,private router: Router){}
-    ngOnInit(): void {
-      this.getCartProducts();
-    }
+  token: string = localStorage.getItem("token") || "";
 
-    getCartProducts(){
-      if (typeof localStorage !== 'undefined') {
-          const cartData = localStorage.getItem("Cart");
-         if (cartData) {
-          this.cartProducts = JSON.parse(cartData);
+  constructor(private service: CartsService, private router: Router) {}
 
-        }
+  ngOnInit(): void {
+    // this.getCartProducts();
+    // console.log(this.cartProducts);
+    this.service.getCart().subscribe({
+      next: (res) => {
+        this.cartProducts = res.data.cartItems;
+        this.calculateTotal();
+        console.log(this.cartProducts);
+      },
+      error: (err) => {
+        console.log(err);
       }
+    });
+  }
 
-      this.getcarttotal();
 
- console.log(this.cartProducts);
+  // getCartProducts() {
+  //   this.loading = true;
+  //   this.service.getCart(this.token).subscribe(
+  //     (response) => {
+  //       this.cartProducts = response.cartProducts;
+  //       console.log(`cartProducts:${this.cartProducts}`);
+  //       this.getCartTotal();
+  //       this.loading = false;
+  //     },
+  //     (error) => {
+  //       console.log("Error fetching cart:", error);
+  //       this.loading = false;
+  //     }
+  //   );
+  // }
+
+
+  getCartTotal() {
+    this.total = 0;
+    for (let product of this.cartProducts) {
+      this.total += product.price * product.quantity;
     }
-// getCartProducts() {
-//   this.service.getCart(this.token).subscribe(
-//     (response) => {
-//       this.cartProducts = response.cartProducts;
-//       this.getcarttotal();
-//        console.log(this.cartProducts);
+  }
 
-//     },
-//     (error) => {
-//       console.log("Error fetching cart:", error);
-//     }
-//   );
-// }
+  calculateTotal() {
+    this.total = this.cartProducts.reduce((acc, product) => {
+      return acc + product.price * product.quantity;
+      // console.log('Total:', this.total);
 
-    addAmount(index:number){
-      this.cartProducts[index].quantity++;
-      this.getcarttotal();
-      localStorage.setItem("Cart",JSON.stringify(this.cartProducts));
+    }, 0);
+  }
+  detectChange() {
+    this.calculateTotal();
+  }
+
+  addAmount(item: any) {
+    item.quantity++;
+    this.updateCartItem(item);
+  }
+
+  minusAmount(item: any) {
+    if (item.quantity > 1) {
+      item.quantity--;
+      this.updateCartItem(item);
     }
+  }
 
-    minusAmount(index:number){
-      this.cartProducts[index].quantity--;
-      this.getcarttotal();
-      localStorage.setItem("Cart",JSON.stringify(this.cartProducts));
-    }
-    goToOrderPage(): void {
-      this.router.navigate(['/order'], {
-        queryParams: {
-          cartProducts: JSON.stringify(this.cartProducts),
-          total: this.total
-        }
-      });
-    }
+  updateCartItem(item: any) {
+    this.service.updateCartItem(item, this.token).subscribe(
+      (response) => {
+        this.calculateTotal();
+      },
+      (error) => {
+        console.log("Error updating cart item:", error);
+      }
+    );
+  }
 
-    detectChange(){
-      localStorage.setItem("Cart",JSON.stringify(this.cartProducts));
-      this.getcarttotal();
-    }
+  deleteProduct(productId: number) {
+    Swal.fire({
+      text: "Are you sure you want to delete it?",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it",
+      cancelButtonText: "No, cancel",
+      reverseButtons: true
+    }).then((res) => {
+      if (res.isConfirmed) {
+        this.service.deleteCartItem(productId, this.token).subscribe(
+          (response) => {
+            this.cartProducts = this.cartProducts.filter(item => item.item.id !== productId);
+            this.getCartTotal();
+          },
+          (error) => {
+            console.log("Error deleting cart item:", error);
+          }
+        );
+      }
+    });
+  }
 
-    deletProduct(index:number){
-      this.cartProducts.splice(index,1);
-      localStorage.setItem("Cart",JSON.stringify(this.cartProducts));
-      this.getcarttotal();
-    }
+  clearCart() {
+    Swal.fire({
+      text: "Are you sure you want to clear the cart?",
+      showCancelButton: true,
+      confirmButtonText: "Yes, clear it",
+      cancelButtonText: "No, cancel",
+      reverseButtons: true
+    }).then((res) => {
+      if (res.isConfirmed) {
+        this.service.clearCart(this.token).subscribe(
+          (response) => {
+            this.cartProducts = [];
+            this.total = 0;
+          },
+          (error) => {
+            console.log("Error clearing cart:", error);
+          }
+        );
+      }
+    });
+  }
 
-    clearCart(){
-      this.cartProducts=[];
-      localStorage.setItem("Cart",JSON.stringify(this.cartProducts));
-      this.getcarttotal();
+  goToOrderPage(): void {
+    this.router.navigate(['/order'], {
+      queryParams: {
+        cartProducts: JSON.stringify(this.cartProducts),
+        total: this.total
+      }
+    });
+  }
 
-    }
+  addCart() {
+    const products = this.cartProducts.map(item => {
+      return { productId: item.item.id, Color: item.item.color };
+    });
 
+    const model = {
+      productId: this.cartProducts[0].item._id,
+      color: this.cartProducts[0].item.color
+    };
 
-     getcarttotal(){
-      this.total=0;
-      for(let x in this.cartProducts)
-       {
-          this.total += this.cartProducts[x].item.price * this.cartProducts[x].quantity;
-       }
-     // console.log(this.total);
-   }
-
-     addCart(){
-  let products=this.cartProducts.map(item => {
-    return {productId:item.item.id,Color:item.item.color}
-  })
-  let Model={
-    productId:this.cartProducts[0].item._id,
-    color:this.cartProducts[0].item.color
-
-  };
-  this.service.createNewCart(Model,this.token).subscribe(res => {
-     this.success=true;
-  })
-  console.log(Model);
-
+    this.service.createNewCart(model, this.token).subscribe(res => {
+      this.success = true;
+    });
+  }
 }
-// deleteProduct(productId: number) {
-//   this.CartsService.deleteProductFromCart(productId, this.token)
-//     .subscribe(
-//       () => {
-//         console.log('Product deleted successfully.');
-//       },
-//       (error: any) => {
-//         console.error('Error deleting product:', error);
-//       }
-//     );
-// }
-
-// deleteProductD(productId: number) {
-//   this.cartsService.deleteProductFromCart(productId)
-//     .subscribe(
-//       () => {
-//         console.log('Product deleted successfully.');
-//       },
-//       (error: any) => {
-//         console.error('Error deleting product:', error);
-//       }
-//     );
-// }
-
-// Delete(id:number,event:any){
-//   Swal.fire({
-//     text:"Are You Sure You Want To Delete It",
-//     showCancelButton:true,
-//     confirmButtonText:"yes , Delete It",
-//     cancelButtonText:"No Cancel",
-//     reverseButtons:true
-//   }).then((res)=>{
-//     if(res.isConfirmed){
-//       this.CartsService.DeleteProduct(id).subscribe({
-//         next:(res:any)=>{
-//           console.log(res);
-
-
-
-//           const Tr=event.target.closest('tr');
-//           if(Tr){
-//             Tr.remove();
-//           }
-//           // }
-
-//         }
-//       })
-
-//     }
-//   })
-
-// }
-
-}
-
-
-
-
-
-
-

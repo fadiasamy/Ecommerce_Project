@@ -1,62 +1,85 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
-import { catchError } from 'rxjs';
-import { throwError } from 'rxjs';
-
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartsService {
 
-  constructor(private http:HttpClient) { }
-  createNewCart(Model:any,token:string){
+  constructor(private http: HttpClient) { }
+
+  createNewCart(model: any, token: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-type': 'application/json; charset=UTF-8',
-     Authorization: "Bearer "+token,
+      Authorization: "Bearer " + token,
     });
-    return this.http.post(environment.baseApi + 'cart',Model,{headers});
+    return this.http.post(environment.baseApi + 'cart', model, { headers }).pipe(
+      catchError(this.handleError)
+    );
   }
 
   // getCart(token: string): Observable<any> {
   //   const headers = new HttpHeaders({
   //     Authorization: "Bearer " + token,
   //   });
-  //   return this.http.get(environment.baseApi + 'cart', { headers });
+  //   return this.http.get(environment.baseApi + 'cart', { headers }).pipe(
+  //     catchError(this.handleError)
+  //   );
   // }
+  getCart(): Observable<any> {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      return this.http.get('https://e-commerce-aibk.onrender.com/api/v1/cart', { headers })
+        .pipe(
+          catchError(error => {
+            // Handle the error here, log it or do other actions if necessary
+            console.error('Error fetching products:', error);
+            // Forward the error by returning an observable that emits the error
+            return throwError(error);
+          })
+        );
+    } else {
+      // If token is not available, return an observable with an error message
+      return throwError("User token not found in local storage");
+    }
+  }
 
-  // deleteProductFromCart(productId: number, token: string): Observable<any> {
-  //   const headers = new HttpHeaders({
-  //     Authorization: "Bearer " + token,
-  //   });
-  //   return this.http.delete(environment.baseApi + 'cart/' + productId, { headers });
-  // }
+  updateCartItem(item: any, token: string): Observable<any> {
+    const { productId, quantity } = item;
+    return this.http.patch<any>(
+      `${environment.baseApi}cart/${productId}`,
+      { quantity },
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
 
-  // DeleteProduct(id:number){
-  //   const token = localStorage.getItem("token");
-  //  if (token) {
 
-  //    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  //    const headersOptions = { headers: headers };
+  deleteCartItem(productId: number, token: string): Observable<any> {
+    return this.http.delete<any>(`${environment.baseApi}cart/${productId}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
 
-  //    return this.http.delete(`https://e-commerce-aibk.onrender.com/api/v1/products/${id},headersOptions`)
-  //      .pipe(
-  //        catchError(error => {
-  //          console.error('Error fetching products:', error);
-  //          return throwError(error);
-  //        })
-  //      );
-  //  } else {
-  //    return throwError("admin token not found in local storage");
-  //  }
-  //  }
+  clearCart(token: string): Observable<any> {
+    return this.http.delete<any>(`${environment.baseApi}cart`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
 
+  private handleError(error: HttpErrorResponse) {
+    console.error('An error occurred:', error);
+    return throwError('Something bad happened; please try again later.');
+  }
 }
-
-
-
-
-
-
