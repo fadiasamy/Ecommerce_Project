@@ -7,7 +7,8 @@ export const authGuard: CanActivateFn=(
  ) => {
    const router:Router = inject(Router);
    const protectedRoutes:string[] = ['/carts','/user-profile'];
-   const isTokenAvailable = localStorage && localStorage.getItem('token');
+  
+   const isTokenAvailable = typeof localStorage !== 'undefined' && localStorage.getItem('token');
 
    return protectedRoutes.includes(state.url) && !isTokenAvailable
        ? router.navigate(['/login'])

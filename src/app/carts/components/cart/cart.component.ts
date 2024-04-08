@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartsService } from '../../services/carts.service';
 import Swal from 'sweetalert2';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
+import { loadStripe } from '@stripe/stripe-js';
 
 @Component({
   selector: 'app-cart',
@@ -10,12 +13,13 @@ import Swal from 'sweetalert2';
 })
 export class CartComponent implements OnInit {
   cartProducts: any[] = [];
+  cart:any;
   total: number = 0;
   success: boolean = false;
   loading: boolean = false;
   token: string = localStorage.getItem("token") || "";
 
-  constructor(private service: CartsService, private router: Router) {}
+  constructor(private service: CartsService, private router: Router,private http:HttpClient) {}
 
   ngOnInit(): void {
     // this.getCartProducts();
@@ -23,8 +27,10 @@ export class CartComponent implements OnInit {
     this.service.getCart().subscribe({
       next: (res) => {
         this.cartProducts = res.data.cartItems;
+        this.cart = res.data;
         this.calculateTotal();
         console.log(this.cartProducts);
+        console.log(this.cart);
       },
       error: (err) => {
         console.log(err);
@@ -158,4 +164,19 @@ export class CartComponent implements OnInit {
       this.success = true;
     });
   }
+
+  onCheckout():void{
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json; charset=UTF-8',
+      Authorization: "Bearer " + this.token,
+    });
+      this.http.post(`https://e-commerce-aibk.onrender.com/api/v1/checkout/checkout-session/${this.cart._id}` , null, {headers})
+      .subscribe(async(res:any)=>{
+        console.log(res);
+         let stripe = await loadStripe('pk_test_51P1c59LcHM3W6bW6faM9MhkZFZNCYSxZ9fWawRpFmVlqThBS2ByMeVMe9ekDM1hIzzqE7IOyWcxTve6zpJ9DLTJI00PBUmLWjo');
+         stripe?.redirectToCheckout({
+            sessionId:res.session.id
+         }) 
+    });
+      }
 }
