@@ -5,7 +5,7 @@ import { ProductsDetailsComponent } from './products/components/products-details
 import { LoginComponent } from './auth/components/login/login.component';
 import { CartComponent } from './carts/components/cart/cart.component';
 import { UserProfileComponent } from './user-profile/Components/user-profile.component';
-import { OrderComponent } from './order/order.component';
+// import { OrderComponent } from './order/order.component';
 import { CategoryComponent } from './category/category.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { RegisterComponent } from './auth/components/register/register.component';
@@ -19,16 +19,11 @@ const routes: Routes = [
   {path:"login", component:LoginComponent},
   {path:"register", component:RegisterComponent},
   {path:"carts" , component:CartComponent, canActivate:[authGuard]},
-  {path:"order",component:OrderComponent, canActivate:[authGuard]},
+  // {path:"order",component:OrderComponent, canActivate:[authGuard]},
   {path:"categories" , component:CategoryComponent},
   {path:'product/:id', component:AllProductsComponent},
-
-
-
   // {path:"**" , redirectTo:"products",pathMatch:"full"}
   {path:"**" , redirectTo:"categories",pathMatch:"full"}
-
-
 ];
 
 @NgModule({

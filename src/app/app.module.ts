@@ -2,7 +2,7 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
-import { OrderComponent } from './order/order.component';
+// import { OrderComponent } from './order/order.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from './shared/shared.module';
@@ -20,9 +20,9 @@ import { CategoryComponent } from './category/category.component';
 @NgModule({
   declarations: [
     AppComponent,
-   OrderComponent,
+  //  OrderComponent,
    CategoryComponent
-   
+
 
   ],
   imports: [

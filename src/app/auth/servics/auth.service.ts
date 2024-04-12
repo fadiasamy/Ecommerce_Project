@@ -24,7 +24,8 @@ export class AuthService {
     this.userObservable = this.userSubject.asObservable();
   }
 
-  
+
+
   login(userLogin: IUserLogin): Observable<User> {
     this.loading = true;
     return this.http.post<User>(`${environment.baseApi}users/login`, userLogin);
@@ -38,15 +39,15 @@ export class AuthService {
     //         text: 'Login successful'
     //       });
     //       this.setUserToLocalStorage(user);
-         
+
     //       this.userSubject.next(user);
-          
+
     //       // Check if localStorage is available before using it
     //       if (typeof localStorage !== 'undefined') {
     //         localStorage.setItem('token', user.token);
     //       }
- 
-        
+
+
     //     },
     //     error: (errorResponse) => {
     //       this.loading=false
@@ -58,13 +59,13 @@ export class AuthService {
     //       })
     //        // Return an observable to continue the observable chain
     //     }
-    //   })     
+    //   })
     // );
     }
 
     register(userRegister: IUserRegister): Observable<User>{
       this.loading = true;
-  
+
       return this.http.post<User>(`${environment.baseApi}users/register`, userRegister);
       // .pipe(tap({
       //   next:(user)=>{
@@ -84,7 +85,7 @@ export class AuthService {
       //         title: 'Error',
       //         text: errorResponse.error.message
       //       });
-          
+
       //   }
       // })
       // )
@@ -104,7 +105,7 @@ export class AuthService {
         localStorage.setItem(USER_KEY, JSON.stringify(user));
       }
     }
-  
+
     public getUserFromLocalStorage(): User {
       // Check if localStorage is available before using it
       if (typeof localStorage !== 'undefined') {

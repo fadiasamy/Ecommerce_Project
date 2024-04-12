@@ -36,14 +36,11 @@ export class CartsService {
       return this.http.get('https://e-commerce-aibk.onrender.com/api/v1/cart', { headers })
         .pipe(
           catchError(error => {
-            // Handle the error here, log it or do other actions if necessary
             console.error('Error fetching products:', error);
-            // Forward the error by returning an observable that emits the error
             return throwError(error);
           })
         );
     } else {
-      // If token is not available, return an observable with an error message
       return throwError("User token not found in local storage");
     }
   }

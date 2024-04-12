@@ -7,8 +7,7 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="{{profile.data.photo}}" alt="avatar"
-              class="rounded-circle img-fluid" style="width: 150px;">
+            <img src="{{ profile.data.photo }}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
             <h5 class="my-3">{{ profile.data.name }}</h5>
           </div>
         </div>
@@ -35,11 +34,11 @@
                 </div>
               </div>
               <hr>
-              <button class="btn btn-primary rounded-square bg-secondary" (click)="toggleEditMode()">Edit Profile</button>
+              <button class="btn btn-primary rounded-square bg-secondary mr-5" (click)="toggleEditMode()">Edit Profile</button>
+              <button class="btn btn-primary rounded-square bg-secondary ml-8" (click)="toggleOrderHistory()">Orders</button>
             </div>
             <ng-template #editModeTemplate>
-              <form >
-
+              <form>
                 <div class="form-group">
                   <br>
                   <label for="nameInput">Full Name</label>
@@ -53,7 +52,7 @@
                 <br>
                 <div class="form-group">
                   <label for="image">image</label>
-                  <input type="file" id="imgInput" name="imgInput"  (change)="onFileChange($event)">
+                  <input type="file" id="imgInput" name="imgInput" (change)="onFileChange($event)">
                 </div>
                 <br>
                 <button type="submit" class="btn btn-primary rounded-square bg-secondary mr-3" (click)="updateUserProfile()">Save Changes</button>
@@ -67,6 +66,11 @@
   </div>
 </section>
 
-
-
-
+<div *ngIf="showOrderHistory">
+  <h3>Order History</h3>
+  <ul>
+    <li *ngFor="let order of orderHistory">
+      Order ID: {{ order.id }} | Date: {{ order.date }} | Total: {{ order.total }}
+    </li>
+  </ul>
+</div>
