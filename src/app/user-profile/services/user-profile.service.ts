@@ -65,6 +65,8 @@ export class UserProfileService {
     console.log(token);
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<any>(`https://e-commerce-aibk.onrender.com/api/v1/orders/user/${userId}`, { headers });
+    // return this.http.get<any>(`http://localhost:3000/api/v1/orders/user/${userId}`, { headers });
+
   }
 }
 

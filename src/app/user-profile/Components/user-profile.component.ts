@@ -93,10 +93,13 @@ export class UserProfileComponent implements OnInit {
   getOrderHistory() {
     this.loading = true;
     const userId = this.profile.data.id;
+    console.log(userId);
+    // this.token=" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTM0YWI5NzAxYjQxNjI1NWEzNTJhZiIsImlhdCI6MTcxMjg4MDk0MiwiZXhwIjoxNzEzMTQwMTQyfQ.XiyM9IDBL2QTNIqg3qTTmNbXCmawhNotDqdN9C-NvFc";
     console.log(this.token);
     this.userProfileService.getOrdersByUserId(this.token, userId)
-      .subscribe(response => {
-        this.orderHistory = response.data;
+      .subscribe((data:any )=> {
+        this.orderHistory = data;
+        console.log(`data:${data}`)
         console.log('Order history:', this.orderHistory);
         this.loading = false;
       }, error => {

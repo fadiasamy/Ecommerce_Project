@@ -70,7 +70,7 @@
   <h3>Order History</h3>
   <ul>
     <li *ngFor="let order of orderHistory">
-      Order ID: {{ order.id }} | Date: {{ order.date }} | Total: {{ order.total }}
+      Order ID: {{ order._id }} | Date: {{ order.createdAt | date: 'short' }} | Total: {{ order.totalPrice }}
     </li>
   </ul>
 </div>

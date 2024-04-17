@@ -34,6 +34,8 @@ export class CartsService {
     if (token) {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
       return this.http.get('https://e-commerce-aibk.onrender.com/api/v1/cart', { headers })
+      // return this.http.get('http://localhost:3000/api/v1/cart', { headers })
+
         .pipe(
           catchError(error => {
             console.error('Error fetching products:', error);
