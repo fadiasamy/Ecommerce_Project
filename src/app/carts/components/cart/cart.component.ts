@@ -59,7 +59,9 @@ export class CartComponent implements OnInit {
   getCartTotal() {
     this.total = 0;
     for (let product of this.cartProducts) {
-      this.total += product.price * product.quantity;
+      // this.total += product.price * product.quantity;
+      this.total = this.cart.totalCartPrice;
+
     }
   }
 
@@ -176,7 +178,7 @@ export class CartComponent implements OnInit {
          let stripe = await loadStripe('pk_test_51P1c59LcHM3W6bW6faM9MhkZFZNCYSxZ9fWawRpFmVlqThBS2ByMeVMe9ekDM1hIzzqE7IOyWcxTve6zpJ9DLTJI00PBUmLWjo');
          stripe?.redirectToCheckout({
             sessionId:res.session.id
-         }) 
+         })
     });
       }
 }

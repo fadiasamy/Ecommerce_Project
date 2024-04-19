@@ -20,16 +20,16 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of cartProducts; let index = index">
-      <td>{{ item.name }}</td>
-      <td>{{ item.price }}</td>
+      <td>{{ item.product.name }}</td>
+      <td>{{ item.product.price }}</td>
       <td>
         <div class="quantity">
-          <button class="btn btn-dark" (click)="addAmount(item)">+</button>
-          <input class="form-control" type="number" [(ngModel)]="item.quantity" min="1" (change)="updateCartItem(item)">
-          <button class="btn btn-dark" (click)="minusAmount(item)">-</button>
+          <!-- <button class="btn btn-dark" (click)="addAmount(item)">+</button> -->
+          <input class="form-control" type="number" [(ngModel)]="item.product.quantity" min="1" (change)="updateCartItem(item)">
+          <!-- <button class="btn btn-dark" (click)="minusAmount(item)">-</button> -->
         </div>
       </td>
-      <td>{{ item.price * item.quantity }}</td>
+      <td>{{ item.product.price * item.product.quantity }}</td>
       <td><button class="btn btn-primary rounded-square bg-secondary" (click)="deleteProduct(item._id)">Delete</button></td>
     </tr>
   </tbody>
@@ -39,7 +39,9 @@
       <th></th>
       <th></th>
       <th></th>
-      <th>Total: {{total}}</th>
+      <!-- <th>Total: {{total}}</th> -->
+      <th>Total: {{ cart.totalCartPrice }}</th>
+
     </tr>
   </tfoot>
 </table>
