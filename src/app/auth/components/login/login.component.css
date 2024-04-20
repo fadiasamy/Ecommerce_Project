@@ -35,6 +35,13 @@ form{
     border-radius:50px;
      width:400px;
 }
+
+.btn:hover{
+   
+    border-radius:50px;
+     width:400px;
+     opacity: 0.9;
+}
  
   .logo-title {
     color: #DB3022;

@@ -40,7 +40,9 @@ ul{
 	position: absolute;
 	left:0;
 	bottom: -10px;
+ 
 	background-color:rgb(219, 48, 34);
+ 
 	height: 2px;
 	box-sizing: border-box;
 	width: 50px;
