@@ -23,44 +23,43 @@
   </section>
 </div> -->
 
-
 <section>
+  <div class="baba text-center p-2 d-flex justify-content-center">
+    <header class="text-center">
+      <p class="small color lead small text-uppercase mb-1">
+        Carefully created collections
+      </p>
+      <h2 class="h5 text-uppercase mb-4">Browse our categories</h2>
+    </header>
+  </div>
 
-    <div class="baba  text-center p-2  d-flex justify-content-center ">
-      <header class="text-center">
-        <p class="small color lead small text-uppercase mb-1">
-          Carefully created collections
-        </p>
-        <h2 class="h5 text-uppercase mb-4">Browse our categories</h2>
-      </header>
-  
-             
-              
+  <div class="container-fluid">
+    <div class="py-5">
+      <input
+        [formControl]="termControl"
+        placeholder="Search Category"
+        class="form-control w-50 shadow-lg"
+        type="text"
+        name=""
+      />
     </div>
-  
-    <div class="container-fluid">
-      <div class="py-5">
-        <input [formControl]="termControl" placeholder="Search Category" class="form-control w-50 shadow-lg " type="text" name="">
-    </div>
-      <div class="row g-5">
-    
-        <div class="mother col-md-6 p-2 border-0  " *ngFor="let item of filteredProducts; let i = index"  >
-          <div class="child shadow    ">
-            <div  class="img-parent pic w-100 mb-4 rounded-4">
-              <a class="category-item" [routerLink]="'/product/' + item._id" ><img class="w-100 "
-                src="assets/images/{{ item.image }}"alt=""
-              /></a>
-  
-  
-            </div>
-            <h2 class="lorem p-2">{{item.name}}</h2>
-  
-            
+    <div class="row g-5">
+      <div
+        class="mother col-md-6 p-2 border-0"
+        *ngFor="let item of filteredProducts; let i = index"
+      >
+        <div class="child shadow">
+          <div class="img-parent pic w-100 mb-4 rounded-4">
+            <!-- <a class="category-item" [routerLink]="'/product/' + item._id" -->
+            <a
+              class="category-item"
+              [routerLink]="'/categories/' + item._id + '/products'"
+              ><img class="w-100" src="assets/images/{{ item.image }}" alt=""
+            /></a>
           </div>
-            
-        
+          <h2 class="lorem p-2">{{ item.name }}</h2>
         </div>
       </div>
     </div>
-  </section>
-  
+  </div>
+</section>

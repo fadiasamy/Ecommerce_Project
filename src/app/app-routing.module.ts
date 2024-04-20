@@ -21,7 +21,9 @@ const routes: Routes = [
   {path:"carts" , component:CartComponent, canActivate:[authGuard]},
   // {path:"order",component:OrderComponent, canActivate:[authGuard]},
   {path:"categories" , component:CategoryComponent},
-  {path:'product/:id', component:AllProductsComponent},
+  // {path:'product/:id', component:AllProductsComponent},
+  { path: 'categories/:id/products', component: AllProductsComponent },
+  // { path: 'product/:id', redirectTo: 'details/:id' },
   // {path:"**" , redirectTo:"products",pathMatch:"full"}
   {path:"**" , redirectTo:"categories",pathMatch:"full"}
 ];
