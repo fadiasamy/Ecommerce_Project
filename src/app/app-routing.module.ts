@@ -10,6 +10,8 @@ import { CategoryComponent } from './category/category.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { authGuard } from './auth/components/guards/auth-guard.guard';
+import { AboutComponent } from './about/about/about.component';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
 const routes: Routes = [
   {path:"products" , component:AllProductsComponent},
@@ -22,7 +24,12 @@ const routes: Routes = [
   // {path:"order",component:OrderComponent, canActivate:[authGuard]},
   {path:"categories" , component:CategoryComponent},
   {path:'product/:id', component:AllProductsComponent},
+  {path:'about', component:AboutComponent},
+  {path:'notFound', component:NotFoundComponent},
+
   // {path:"**" , redirectTo:"products",pathMatch:"full"}
+  { path: '**', component: NotFoundComponent },
+
   {path:"**" , redirectTo:"categories",pathMatch:"full"}
 ];
 

@@ -14,6 +14,8 @@ import { RouterModule } from '@angular/router';
 import { CartsModule } from './carts/carts.module';
 
 import { CategoryComponent } from './category/category.component';
+import { AboutModule } from './about/about.module';
+ 
 
 
 
@@ -21,7 +23,8 @@ import { CategoryComponent } from './category/category.component';
   declarations: [
     AppComponent,
   //  OrderComponent,
-   CategoryComponent
+   CategoryComponent,
+   
 
 
   ],
@@ -33,9 +36,9 @@ import { CategoryComponent } from './category/category.component';
     RouterModule,
     CartsModule,
     FormsModule,
-    ReactiveFormsModule
-
-
+    ReactiveFormsModule,
+    AboutModule
+   
   ],
   providers: [
     provideHttpClient(withFetch())
