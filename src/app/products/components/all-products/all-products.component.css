@@ -7,3 +7,10 @@
   /* width: 100% !important; */
   /* background-color: blue; */
 }
+.classorange{
+  background-color: rgb(250, 27, 6);
+  ;
+}
+.classorange:hover{
+  opacity: 0.7;
+}

@@ -177,3 +177,10 @@
   object-fit: cover;
   cursor: pointer;
 } */
+.classorange{
+  background-color: rgb(250, 27, 6);
+  ;
+}
+.classorange:hover{
+  opacity: 0.7;
+}

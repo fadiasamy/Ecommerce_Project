@@ -20,8 +20,8 @@ ul{
 	list-style: none;
 }
 .footer{
-	background-color: #24262b;
-    padding: 70px 0;
+	background-color: #131722;
+    /* padding: 70px 0; */
 }
 .footer-col{
    width: 25%;
@@ -40,7 +40,9 @@ ul{
 	position: absolute;
 	left:0;
 	bottom: -10px;
-	background-color: rgb(219, 48, 34);
+ 
+	background-color:rgb(219, 48, 34);
+ 
 	height: 2px;
 	box-sizing: border-box;
 	width: 50px;

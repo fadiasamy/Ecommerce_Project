@@ -30,7 +30,7 @@
         </div>
       </td>
       <td>{{ item.product.price * item.product.quantity }}</td>
-      <td><button class="btn btn-primary rounded-square bg-secondary" (click)="deleteProduct(item._id)">Delete</button></td>
+      <td><button class="btn btn-danger rounded-square " (click)="deleteProduct(item._id)">Delete</button></td>
     </tr>
   </tbody>
   <tfoot>
@@ -49,4 +49,4 @@
   <strong>Well Done!</strong> Your order has been successfully sent.
 </div>
 <!-- <button class="btn btn-primary rounded-square bg-secondary" (click)="goToOrderPage()">Order Now</button> -->
-<button class="btn btn-primary rounded-square bg-secondary" (click)="onCheckout()">Proceed To Checkout</button>
+<button class="btn  btn-success rounded-2 text-white " (click)="onCheckout()">Proceed To Checkout</button>

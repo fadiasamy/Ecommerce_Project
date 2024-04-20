@@ -11,7 +11,7 @@
     background-color: var(--light-bg);
 }
 body{
-   background-color:var(--bg-main);
+   background-color:#fff;
    font-family:var(--main-Font);
    color: var(--text-color);
 }
