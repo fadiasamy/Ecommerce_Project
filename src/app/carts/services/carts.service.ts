@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -61,13 +63,28 @@ export class CartsService {
   }
 
 
-  deleteCartItem(productId: number, token: string): Observable<any> {
+  // deleteCartItem(productId: number, token: string): Observable<any> {
+  //   return this.http.delete<any>(`${environment.baseApi}cart/${productId}`, {
+  //     headers: { Authorization: `Bearer ${token}` }
+  //   }).pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
+  deleteCartItem(productId: number, token: string) {
     return this.http.delete<any>(`${environment.baseApi}cart/${productId}`, {
       headers: { Authorization: `Bearer ${token}` }
     }).pipe(
-      catchError(this.handleError)
+      catchError((error) => {
+        console.log("Error deleting cart item:", error);
+        return [];
+      }),
+      map((response) => {
+        console.log("Deleted Product ID:", productId);
+        return response;
+      })
     );
   }
+
 
   clearCart(token: string): Observable<any> {
     return this.http.delete<any>(`${environment.baseApi}cart`, {

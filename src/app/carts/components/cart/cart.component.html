@@ -30,7 +30,9 @@
         </div>
       </td>
       <td>{{ item.product.price * item.product.quantity }}</td>
-      <td><button class="btn btn-primary rounded-square bg-secondary" (click)="deleteProduct(item._id)">Delete</button></td>
+      <!-- <td><button class="btn btn-primary rounded-square bg-secondary" (click)="deleteProduct(item._id)">Delete</button></td> -->
+      <td><button class="btn btn-primary rounded-square bg-secondary" (click)="deleteProduct(item.product.id)">Delete</button></td>
+
     </tr>
   </tbody>
   <tfoot>
@@ -39,7 +41,6 @@
       <th></th>
       <th></th>
       <th></th>
-      <!-- <th>Total: {{total}}</th> -->
       <th>Total: {{ cart.totalCartPrice }}</th>
 
     </tr>
