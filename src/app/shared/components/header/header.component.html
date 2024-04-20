@@ -1,43 +1,9 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+ 
+ 
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/products">Products</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/carts">Carts</a>
-      </li>
-      <li class="nav-item dropdown"*ngIf="isAuth">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{user.user.name}}
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" >Logout</a>
-        </div>
-      </li>
-      <li class="nav-item" *ngIf="!isAuth">
-        <a class="nav-link" routerLink="/login">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/user-profile">My Profile</a>
-      </li>
-      <li class="nav-item" *ngIf="user.token">
-        <a class="nav-link"routerLink="#" (click)="logout()">Logout</a>
-      </li>
-    </ul>
-  </div>
-</nav> -->
-
-
-<nav class="navbar navbar-expand-lg bg-transparent navbar-dark ">
+<nav class="navbar navbar-expand-lg  navbar-light ">
  <div class="container-fluid">
-  <a class=" navbar-brand fw-bolder" href="#">Glamora</a>
+  <a class=" navbar-brand fw-bolder" style="color:  rgb(219, 48, 34);"  routerLink="#">Glamora</a>
 
   <button
     class="navbar-toggler"
@@ -53,14 +19,17 @@
 
   <div class="collapse navbar-collapse " id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto  me-auto mb-2 mb-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/categories">categories</a>
+      <li class="nav-item active" >
+        <a class="nav-link" routerLink="/categories" style="color: black">categories</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/products">Products</a>
+        <a class="nav-link" routerLink="/products" style="color: black;">Products</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/about" style="color: black;">About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/carts">
+        <a class="nav-link" routerLink="/carts" style="color: black;">
           <i
             class="fas fa-dolly-flatbed me-1 text-gray"></i>Carts<small class="text-gray fw-normal"></small></a>
       </li>
@@ -86,15 +55,15 @@
 
     <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
       <li class="nav-item" *ngIf="!isAuth">
-        <a class="nav-link" routerLink="/login">
+        <a class="nav-link" routerLink="/login" style="color: black;">
           <i
           class="fas fa-user me-1 text-gray fw-normal"></i>Login<small class="text-gray fw-normal"></small></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/user-profile">My Profile</a>
+        <a class="nav-link" routerLink="/user-profile" style="color: black;">My Profile</a>
       </li>
       <li class="nav-item" *ngIf="user.token">
-        <a class="nav-link" routerLink="#" (click)="logout()"> <i
+        <a class="nav-link" routerLink="#" (click)="logout()" style="color: black;"> <i
           class="fas fa-user me-1 text-gray fw-normal"></i>Logout<small class="text-gray fw-normal"></small></a>
       </li>
 

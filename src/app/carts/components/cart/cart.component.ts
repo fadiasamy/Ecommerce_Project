@@ -58,23 +58,27 @@ export class CartComponent implements OnInit {
   // }
 
 
+  // getCartTotal() {
+  //   this.total = 0;
+  //   for (let product of this.cartProducts) {
+  //     // this.total += product.price * product.quantity;
+  //     this.total = this.cart.totalCartPrice;
+
+  //   }
+  // }
   getCartTotal() {
     this.total = 0;
     for (let product of this.cartProducts) {
-      // this.total += product.price * product.quantity;
-      this.total = this.cart.totalCartPrice;
-
+      this.total += product.product.price * product.product.quantity;
     }
-  }
-
-  calculateTotal() {
-    this.total = this.cartProducts.reduce((acc, product) => {
-      return acc + product.price * product.quantity;
-      // console.log('Total:', this.total);
+}
 
 
-    }, 0);
-  }
+calculateTotal() {
+  this.total = this.cartProducts.reduce((acc, product) => {
+    return acc + product.product.price * product.product.quantity;
+  }, 0);
+}
   detectChange() {
     this.calculateTotal();
   }
@@ -156,22 +160,15 @@ export class CartComponent implements OnInit {
       reverseButtons: true
     }).then((res) => {
       if (res.isConfirmed) {
-        console.log("Product ID to delete:", productId);
-        this.service.deleteCartItem(productId, this.token).pipe(
-          catchError((error) => {
-            console.log("Error deleting cart item:", error);
-            return [];
-          })
-        ).subscribe(() => {
-          console.log(productId);
-          this.cartProducts = this.cartProducts.filter(item => item.item.id !== productId);
-          this.getCartTotal();
+        this.service.deleteCartItem(productId, this.token).subscribe(() => {
+          this.cartProducts = this.cartProducts.filter(item => item.product._id !== productId);
+          this.calculateTotal();
+        }, (error) => {
+          console.log("Error deleting cart item:", error);
         });
       }
     });
   }
-
-
 
   clearCart() {
     Swal.fire({
@@ -186,6 +183,7 @@ export class CartComponent implements OnInit {
           (response) => {
             this.cartProducts = [];
             this.cart.totalCartPrice = 0;
+            this.calculateTotal();
           },
           (error) => {
             console.log("Error clearing cart:", error);

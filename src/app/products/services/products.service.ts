@@ -28,9 +28,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Observable, catchError } from 'rxjs';
+import { Observable, catchError, forkJoin } from 'rxjs';
 import { throwError } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
+import { switchMap } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -46,22 +48,33 @@ export class ProductsService {
       .set('sortField', sortField)
       .set('sortOrder', sortOrder);
 
-    return this.http.get(environment.baseApi + 'products', { params: params });
+    return this.http.get<any[]>(environment.baseApi + 'products', { params: params })
+  //   .pipe(
+  //   switchMap((allProducts:any[]) =>{
+  //     const productsObs = allProducts.map((product: any)=>{
+  //       return this.getProductsByCategory(product.category);
+  //     });
+  //     return forkJoin(productsObs);
+  //   }),
+  //   catchError(err => {return throwError(err)})
+  // ) ;
   }
 
   getProductById(id: any) {
     return this.http.get(environment.baseApi + 'products/' + id);
   }
 
-
+  getProductsByCategory(id: string): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.baseApi}categories/${id}/products`);
+  }
 
   addproducttoCart(productData:object):Observable<any>{
     const token = localStorage.getItem("token");
    if (token) {
-    
+
      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
      const headersOptions = { headers: headers };
-  
+
      return this.http.post('https://e-commerce-aibk.onrender.com/api/v1/cart',productData, headersOptions)
        .pipe(
          catchError(error => {
@@ -72,8 +85,8 @@ export class ProductsService {
    } else {
      return throwError("User token not found in local storage");
    }
-  
-  
-  
+
+
+
    }
 }

@@ -1,7 +1,7 @@
 <div class="text-center w-100" *ngIf="loading">
   <app-spinner></app-spinner>
 </div>
-<section style="background-color: #eee;">
+<section class="p-5" style="background-color: #eee;">
   <div class="container py-5">
     <div class="row">
       <div class="col-lg-4">
@@ -18,7 +18,7 @@
             <div *ngIf="!editMode; else editModeTemplate">
               <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0">Full Name</p>
+                  <p class="mb-0 classblack fw-bolder">Full Name</p>
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0">{{ profile.data.name }}</p>
@@ -27,15 +27,15 @@
               <hr>
               <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0">Email</p>
+                  <p class="mb-0 classblack fw-bolder ">Email</p>
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0">{{ profile.data.email }}</p>
                 </div>
               </div>
               <hr>
-              <button class="btn btn-primary rounded-square bg-secondary mr-5" (click)="toggleEditMode()">Edit Profile</button>
-              <button class="btn btn-primary rounded-square bg-secondary ml-8" (click)="toggleOrderHistory()">Orders</button>
+              <button class="btn classorange rounded-square text-white m-4" (click)="toggleEditMode()">Edit Profile</button>
+              <button class="btn btn-success rounded-square  ml-8" (click)="toggleOrderHistory()">Orders</button>
             </div>
             <ng-template #editModeTemplate>
               <form>
@@ -66,11 +66,13 @@
   </div>
 </section>
 
-<div *ngIf="showOrderHistory">
-  <h3>Order History</h3>
-  <ul>
-    <li *ngFor="let order of orderHistory">
-      Order ID: {{ order._id }} | Date: {{ order.createdAt | date: 'short' }} | Total: {{ order.totalPrice }}
+<div *ngIf="showOrderHistory" class="mt-4">
+  <h3 class="mb-3">Order History</h3>
+  <ul class="list-group">
+    <li *ngFor="let order of orderHistory" class="list-group-item">
+      <span class="fw-bold">Order paidAt :</span> {{ order.paidAt | date: 'short'}} | <span class="fw-bold">Date:</span> {{ order.createdAt | date: 'short' }} | <span class="fw-bold">Total:</span> {{ order.totalPrice }} | <span class="fw-bold">Status:</span> {{ order.status
+      }}
     </li>
   </ul>
 </div>
+

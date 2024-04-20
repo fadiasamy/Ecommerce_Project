@@ -1,17 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 :root{
-    --bg-main:#131722;
+    --bg-main: #fff;
     --light-bg:#24baef;
     --main-Font:"Montserrat Alternates", sans-serif;
-    --text-color:#fff;
+    --text-color:black;
     --border-color:#a8a8a83d
 }
 .bg-mine-ligh{
     background-color: var(--light-bg);
 }
 body{
-   background-color:var(--bg-main);
+   background-color:#fff;
    font-family:var(--main-Font);
    color: var(--text-color);
 }
@@ -35,10 +35,39 @@ text-decoration: none;
 }
 
 .textcolor{
-    color: #969a9d;
+    color: black;
 }
 body
 {
   padding: 0;
   margin:0 !important ;
 }
+
+
+/* Keyframes for icon animation */
+@keyframes iconAnimation {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Keyframes for text animation */
+@keyframes textAnimation {
+    0% {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+ 
+
+ 

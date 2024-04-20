@@ -33,6 +33,7 @@ export class CategoryComponent implements OnInit {
         this.allCategors=result;
         this.allCategories=result.slice(0,4);
         console.log(result);
+        console.log(this.allCategors);
         this.searchProducts(' ');
         this.termControl.valueChanges.subscribe((value: string) => {
           this.searchProducts(value);
@@ -45,12 +46,17 @@ export class CategoryComponent implements OnInit {
   searchProducts(term: string): void {
     if (!term.trim()) {
       // If search term is empty, show all products
-      this.filteredProducts = this.allCategories;
+      // this.filteredProducts = this.allCategors.filter(category => this.hasProducts(category))
+      this.filteredProducts = this.allCategors;
+      console.log(this.filteredProducts);
     } else {
       // Filter products based on search term
-      this.filteredProducts = this.allCategories.filter(product =>
+      this.filteredProducts = this.allCategors.filter(product =>
         product.name.toLowerCase().includes(term.toLowerCase())
       );
     }
   }
+// private hasProducts(category:Category){
+//   return category.products && category.products.length > 0
+// }
 }
