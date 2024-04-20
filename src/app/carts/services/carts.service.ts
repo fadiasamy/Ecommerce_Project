@@ -70,10 +70,27 @@ export class CartsService {
   //     catchError(this.handleError)
   //   );
   // }
-  deleteCartItem(productId: number, token: string) {
-    return this.http.delete<any>(`https://e-commerce-aibk.onrender.com/api/v1/cart/${productId}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    }).pipe(
+  // deleteCartItem(productId: number, token: string) {
+  //   return this.http.delete<any>(`${environment.baseApi}cart/${productId}`, {
+  //     headers: { Authorization: `Bearer ${token}` }
+  //   }).pipe(
+  //     catchError((error) => {
+  //       console.log("Error deleting cart item:", error);
+  //       return [];
+  //     }),
+  //     map((response) => {
+  //       console.log("Deleted Product ID:", productId);
+  //       return response;
+  //     })
+  //   );
+  // }
+
+  deleteCartItem(productId: number, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.delete<any>(`${environment.baseApi}cart/${productId}`, { headers }).pipe(
       catchError((error) => {
         console.log("Error deleting cart item:", error);
         return [];
@@ -84,6 +101,7 @@ export class CartsService {
       })
     );
   }
+
 
 
   clearCart(token: string): Observable<any> {

@@ -161,6 +161,7 @@ calculateTotal() {
     }).then((res) => {
       if (res.isConfirmed) {
         this.service.deleteCartItem(productId, this.token).subscribe(() => {
+          console.log(productId);
           this.cartProducts = this.cartProducts.filter(item => item.product._id !== productId);
           this.calculateTotal();
         }, (error) => {
