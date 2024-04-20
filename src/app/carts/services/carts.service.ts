@@ -71,7 +71,7 @@ export class CartsService {
   //   );
   // }
   deleteCartItem(productId: number, token: string) {
-    return this.http.delete<any>(`${environment.baseApi}cart/${productId}`, {
+    return this.http.delete<any>(`https://e-commerce-aibk.onrender.com/api/v1/cart/${productId}`, {
       headers: { Authorization: `Bearer ${token}` }
     }).pipe(
       catchError((error) => {
