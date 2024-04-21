@@ -22,6 +22,7 @@
     <tr *ngFor="let item of cartProducts; let index = index">
       <td>{{ item.product.name }}</td>
       <td>{{ item.product.price }}</td>
+      
       <td>
         <div class="quantity">
           <!-- <button class="btn btn-dark" (click)="addAmount(item)">+</button> -->
@@ -30,7 +31,7 @@
         </div>
       </td>
       <td>{{ item.product.price * item.product.quantity }}</td>
-      <td><button class="btn btn-danger rounded-square " (click)="deleteProduct(item._id)">Delete</button></td>
+      <td><button class="btn btn-danger rounded-square " (click)="deleteProduct(item.product._id)">Delete</button></td>
     </tr>
   </tbody>
   <tfoot>

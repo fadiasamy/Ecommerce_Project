@@ -65,7 +65,7 @@
   top: 50%;
   left: 50%;
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.285);
+  background-color: rgba(77, 75, 75, 0.285);
   z-index: -1;
 }
 .item:hover .hov {
