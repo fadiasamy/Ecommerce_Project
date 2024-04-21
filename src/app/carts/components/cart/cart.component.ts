@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { loadStripe } from '@stripe/stripe-js';
+import { catchError } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-cart',
@@ -56,22 +58,27 @@ export class CartComponent implements OnInit {
   // }
 
 
+  // getCartTotal() {
+  //   this.total = 0;
+  //   for (let product of this.cartProducts) {
+  //     // this.total += product.price * product.quantity;
+  //     this.total = this.cart.totalCartPrice;
+
+  //   }
+  // }
   getCartTotal() {
     this.total = 0;
     for (let product of this.cartProducts) {
-      // this.total += product.price * product.quantity;
-      this.total = this.cart.totalCartPrice;
-
+      this.total += product.product.price * product.product.quantity;
     }
-  }
+}
 
-  calculateTotal() {
-    this.total = this.cartProducts.reduce((acc, product) => {
-      return acc + product.price * product.quantity;
-      // console.log('Total:', this.total);
 
-    }, 0);
-  }
+calculateTotal() {
+  this.total = this.cartProducts.reduce((acc, product) => {
+    return acc + product.product.price * product.product.quantity;
+  }, 0);
+}
   detectChange() {
     this.calculateTotal();
   }
@@ -99,6 +106,51 @@ export class CartComponent implements OnInit {
     );
   }
 
+  // deleteProduct(productId: number) {
+  //   Swal.fire({
+  //     text: "Are you sure you want to delete it?",
+  //     showCancelButton: true,
+  //     confirmButtonText: "Yes, delete it",
+  //     cancelButtonText: "No, cancel",
+  //     reverseButtons: true
+  //   }).then((res) => {
+  //     if (res.isConfirmed) {
+  //       this.service.deleteCartItem(productId, this.token).subscribe(
+  //         (response) => {
+  //           console.log(productId);
+  //           this.cartProducts = this.cartProducts.filter(item => item.item.id !== productId);
+  //           this.getCartTotal();
+  //         },
+  //         (error) => {
+  //           console.log("Error deleting cart item:", error);
+  //         }
+  //       );
+  //     }
+  //   });
+  // }
+
+  // clearCart() {
+  //   Swal.fire({
+  //     text: "Are you sure you want to clear the cart?",
+  //     showCancelButton: true,
+  //     confirmButtonText: "Yes, clear it",
+  //     cancelButtonText: "No, cancel",
+  //     reverseButtons: true
+  //   }).then((res) => {
+  //     if (res.isConfirmed) {
+  //       this.service.clearCart(this.token).subscribe(
+  //         (response) => {
+  //           this.cartProducts = [];
+  //           this.total = 0;
+  //         },
+  //         (error) => {
+  //           console.log("Error clearing cart:", error);
+  //         }
+  //       );
+  //     }
+  //   });
+  // }
+
   deleteProduct(productId: number) {
     Swal.fire({
       text: "Are you sure you want to delete it?",
@@ -108,15 +160,13 @@ export class CartComponent implements OnInit {
       reverseButtons: true
     }).then((res) => {
       if (res.isConfirmed) {
-        this.service.deleteCartItem(productId, this.token).subscribe(
-          (response) => {
-            this.cartProducts = this.cartProducts.filter(item => item.item.id !== productId);
-            this.getCartTotal();
-          },
-          (error) => {
-            console.log("Error deleting cart item:", error);
-          }
-        );
+        this.service.deleteCartItem(productId, this.token).subscribe(() => {
+          console.log(productId);
+          this.cartProducts = this.cartProducts.filter(item => item.product._id !== productId);
+          this.calculateTotal();
+        }, (error) => {
+          console.log("Error deleting cart item:", error);
+        });
       }
     });
   }
@@ -133,7 +183,8 @@ export class CartComponent implements OnInit {
         this.service.clearCart(this.token).subscribe(
           (response) => {
             this.cartProducts = [];
-            this.total = 0;
+            this.cart.totalCartPrice = 0;
+            this.calculateTotal();
           },
           (error) => {
             console.log("Error clearing cart:", error);
@@ -154,7 +205,7 @@ export class CartComponent implements OnInit {
 
   addCart() {
     const products = this.cartProducts.map(item => {
-      return { productId: item.item.id, Color: item.item.color };
+      return { productId: item.item.id, color:item.item.color };
     });
 
     const model = {

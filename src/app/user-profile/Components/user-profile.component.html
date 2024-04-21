@@ -66,11 +66,13 @@
   </div>
 </section>
 
-<div *ngIf="showOrderHistory">
-  <h3>Order History</h3>
-  <ul>
-    <li *ngFor="let order of orderHistory">
-      Order ID: {{ order._id }} | Date: {{ order.createdAt | date: 'short' }} | Total: {{ order.totalPrice }}
+<div *ngIf="showOrderHistory" class="mt-4">
+  <h3 class="mb-3">Order History</h3>
+  <ul class="list-group">
+    <li *ngFor="let order of orderHistory" class="list-group-item">
+      <span class="fw-bold">Order paidAt :</span> {{ order.paidAt | date: 'short'}} | <span class="fw-bold">Date:</span> {{ order.createdAt | date: 'short' }} | <span class="fw-bold">Total:</span> {{ order.totalPrice }} | <span class="fw-bold">Status:</span> {{ order.status
+      }}
     </li>
   </ul>
 </div>
+
