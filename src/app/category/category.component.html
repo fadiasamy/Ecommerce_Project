@@ -1,6 +1,36 @@
 
+<header id="Home" class="vh-100">
+  <div class="header-content d-flex justify-content-center align-items-center flex-column">
+    <div class="new-animation w-100 py-4 d-flex flex-column mb-4">
+    
+
+      <div class="animation-final">
+        <h3 class="text-white"></h3>
+      </div>
+    </div>
+
+    <div class="header-nav text-white d-flex mt-3">
+      <div class="mx-1 icon d-flex justify-content-center align-items-center rounded-circle">
+        <i class="fa-brands fa-facebook-f fa-1x"></i>
+      </div>
+      <div class="mx-1 icon d-flex justify-content-center align-items-center rounded-circle">
+        <i class="fa-brands fa-instagram fa-1x"></i>
+      </div>
+      <div class="mx-1 icon d-flex justify-content-center align-items-center rounded-circle">
+        <i class="fa-brands fa-linkedin fa-1x"></i>
+      </div>
+      <div class="mx-1 icon d-flex justify-content-center align-items-center rounded-circle">
+        <i class="fa-brands fa-twitter fa-1x"></i>
+      </div>
+      <div class="mx-1 icon d-flex justify-content-center align-items-center rounded-circle">
+        <i class="fa-brands fa-youtube fa-1x"></i>
+      </div>
+    </div>
+  </div>
+</header>
 
 <section>
+
   <div class="baba  p-2 d-flex justify-content-center">
     <header class="text-center">
 
@@ -11,7 +41,7 @@
     </header>
   </div>
 
-  <div class="container-fluid">
+  <div class="container">
     <div class="py-5">
       <input
         [formControl]="termControl"
@@ -23,11 +53,10 @@
     </div>
     <div class="row g-5">
       <div
-        class="mother col-md-6 p-2 border-0"
-        *ngFor="let item of filteredProducts; let i = index"
-      >
+        class="mother col-md-4 p-2 border-0"
+        *ngFor="let item of filteredProducts; let i = index">
         <div class="child shadow rounded-4">
-          <div class="img-parent pic w-100 mb-4 rounded-4">
+          <div class="img-parent  w-100 mb-4 rounded-4">
             <!-- <a class="category-item" [routerLink]="'/product/' + item._id" -->
             <a
               class="category-item"
@@ -35,7 +64,7 @@
               ><img class="w-100" src="assets/images/{{ item.image }}" alt=""
             /></a>
           </div>
-          <h2 class="lorem fw-bolder p-2">{{ item.name }}</h2>
+          <!-- <p class="lorem fw-bolder ">{{ item.name }}</p> -->
         </div>
       </div>
     </div>

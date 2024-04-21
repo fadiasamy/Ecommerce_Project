@@ -31,7 +31,7 @@
 .plus{
     color: var(--main-color);
 }
-
+/* 
 .width{
     width: 10%;
 }
@@ -39,4 +39,136 @@
 h2,p{
     color: rgb(22, 22, 22);
 
-}
+} */
+header{
+    background-image: url(../../assets/images/mujer-joven-bolsas-compras-tomando-selfie_23-2148316459.jpg);
+    background-position: center center;
+    background-size: cover;
+    box-sizing: border-box;
+  }
+  
+  .header-content{
+    width: 100%;
+    min-height: 100%;
+    background-color: rgba(51, 50, 50, 0.6);
+  }
+  
+  .new-animation  {
+     
+    text-align: center;
+  }
+  .new-animation h5{
+    font-size: 50px;
+    font-weight: 800;
+  }
+  .animation-final  {
+    position: relative;
+    width: 100%;
+  }
+  #Home h3{
+    font-size: 2rem;
+    letter-spacing: 1px;
+    font-weight: lighter;
+    
+  }
+  
+  
+  .animation-final h3::after{
+    content: 'i Am';
+    position: absolute;
+    color: white;
+   font-weight: bolder;
+   font-size: x-large;
+   
+    
+   
+    left: 40%;
+    top: 0%;
+    bottom: 0%;
+    animation-name: typing;
+    animation-duration: 7s;
+    animation-iteration-count: infinite;
+    font-size: 2rem;
+  }
+  @media screen and (max-width:768px){
+    .animation-final h3::after{
+        left: 20%;
+       
+    }
+    
+  } 
+    
+  
+  
+  @keyframes typing {
+    0% { content: "W"; }
+    2% { content: " W|"; }
+    4% { content: " We|"; }
+    6% { content: " Wel|"; }
+    8% { content: " Welc|"; }
+    10% { content: " Welco|"; }
+    12% { content: " Welcom|"; }
+    14% { content: " Welcome|"; }
+    16% { content: " Welcome |"; }
+    18% { content: " Welcome t|"; }
+    20% { content: " Welcome to|"; }
+    22% { content: " Welcome to |"; }
+    24% { content: " Welcome to G|"; }
+    26% { content: " Welcome to Gl|"; }
+    28% { content: " Welcome to Gla|"; }
+    30% { content: " Welcome to Glam|"; }
+    32% { content: " Welcome to Glamo|"; }
+    34% { content: " Welcome to Glamor|"; }
+    36% { content: " Welcome to Glamora|"; }
+    38% { content: " Welcome to Glamora |"; }
+    40% { content: " Welcome to Glamora"; }
+    42% { content: " Welcome to Glamora"; }
+    44% { content: " Welcome to Glamor"; }
+    46% { content: " Welcome to Glamo"; }
+    48% { content: " Welcome to Glam"; }
+    50% { content: " Welcome to Gla"; }
+    52% { content: " Welcome to Gl"; }
+    54% { content: " Welcome to G"; }
+    56% { content: " Welcome to G"; }
+    58% { content: " Welcome to Gl"; }
+    60% { content: " Welcome to Gla"; }
+    62% { content: " Welcome to Glam"; }
+    64% { content: " Welcome to Glamor"; }
+    66% { content: " Welcome to Glamora"; }
+    68% { content: " Welcome to Glamor"; }
+    70% { content: " Welcome to Glamo"; }
+    72% { content: " Welcome to Glam"; }
+    74% { content: " Welcome to Gla"; }
+    76% { content: " Welcome to Gl"; }
+    78% { content: " Welcome to G"; }
+    80% { content: " Welcome to G"; }
+    82% { content: " Welcome to G"; }
+    84% { content: " Welcome to G"; }
+    86% { content: " Welcome to G"; }
+    88% { content: " Welcome to G"; }
+    94% { content: " Welcome to G"; }
+    96% { content: " Welcome to G"; }
+    98% { content: " Welcome to G"; }
+    100% { content: " Welcome to G"; }
+    
+  }
+  .icon{
+    width: 2rem;
+    height: 2rem;
+    
+    margin-bottom: 10px;
+    background-color: rgba(00, 00, 00, 0.6);
+  
+   
+  
+  
+  }
+  .home{
+    text-decoration: underline white 2px;
+   
+  }
+  .nav-item{
+    font-weight: lighter;
+    margin: 3px ;
+  }
+  
